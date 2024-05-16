@@ -1,16 +1,29 @@
 import com.example.Lion;
-import com.example.Feline;
 import org.junit.Test;
-import org.mockito.Mock;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
-public class LionExceptionTest {
-   // @Mock
-   // Feline feline;
-    Lion lion;
+@RunWith(Parameterized.class)
+public class LionExceptionParametrizeTest {
+    private final String sex;
+
+
+    public LionExceptionParametrizeTest(String sex) {
+        this.sex = sex;
+    }
+
+    @Parameterized.Parameters (name = "Test {index}: {0}")
+    public static Object[][] getSex() {
+        return new Object[][] {
+                {"Unknown"},
+                {"неизвестный"},
+                {null},
+
+        };
+    }
 
     @Test(expected = Exception.class)
     public void HaveMaleException() throws Exception {
-        lion = new Lion("Unkown", null);
-
+        new Lion(sex, null);
     }
 }
